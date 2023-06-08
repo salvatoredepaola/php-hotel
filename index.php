@@ -47,7 +47,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -55,5 +58,44 @@
         var_dump($hotels)
     ?>    
 
+    <main>
+
+        <div>
+            <?php foreach ($hotels as $hotel) { ?> 
+                <h4><?php echo $hotel["name"] . " " . $hotel["description"] ?></h4>
+                <br> 
+            <?php } ?> 
+        </div>
+
+        <div>
+            <?php foreach ($hotels as $hotel) { ?> 
+                <?php foreach($hotel as $key => $value) { ?> 
+                    <h4><?php echo "$key: $value" ?></h4>
+                <?php } ?>
+                <br> 
+            <?php } ?> 
+        </div>
+
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <?php foreach($hotels[0] as $key => $value) { ?> 
+                            <td scope="col"><?php echo "$key" ?></td>
+                        <?php } ?>  
+                    </tr>
+                </thead>
+                <tbody> 
+                    <?php foreach ($hotels as $hotel) { ?>
+                        <tr>
+                            <?php foreach($hotel as $key => $value) { ?> 
+                                <td scope="col"><?php echo "$value" ?></td>
+                            <?php } ?>
+                        </tr>
+                    <?php } ?> 
+                </tbody>
+            </table>
+        </div>
+    </main>
 </body>
 </html>
