@@ -1,5 +1,5 @@
 <?php
-
+    $parkingFilter = ($_GET['parking'] == "si") ? true : false;
     $hotels = [
 
         [
@@ -54,29 +54,23 @@
 </head>
 <body>
 
-    <?php 
-        var_dump($hotels)
-    ?>    
-
     <main>
-
-        <div>
-            <?php foreach ($hotels as $hotel) { ?> 
-                <h4><?php echo $hotel["name"] . " " . $hotel["description"] ?></h4>
-                <br> 
-            <?php } ?> 
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <form action="hotels.php">
+                        <label for="">parcheggio</label>
+                        <select name="parking" id="parking">
+                            <option value="" selected>All</option>
+                            <option value="si">Si</option>
+                        </select>
+                        <button class="btn" type="submit">invia</button>
+                    </form>
+                </div>
+            </div>
         </div>
 
-        <div>
-            <?php foreach ($hotels as $hotel) { ?> 
-                <?php foreach($hotel as $key => $value) { ?> 
-                    <h4><?php echo "$key: $value" ?></h4>
-                <?php } ?>
-                <br> 
-            <?php } ?> 
-        </div>
-
-        <div>
+        <div class="container">
             <table class="table">
                 <thead>
                     <tr>
@@ -87,10 +81,19 @@
                 </thead>
                 <tbody> 
                     <?php foreach ($hotels as $hotel) { ?>
-                        <tr>
-                            <?php foreach($hotel as $key => $value) { ?> 
-                                <td scope="col"><?php echo "$value" ?></td>
-                            <?php } ?>
+                        <?php if (!$parkingFilter || ($parkingFilter && $hotel['parking']) ) {?>
+                            <tr>
+                                <?php 
+                                foreach($hotel as $key => $value) { 
+                                    if ($value === true) {
+                                        $value = "si";
+                                    } else if (!$value === true){
+                                        $value = "no";
+                                    }
+                                ?> 
+                                    <td scope="col"><?php echo "$value" ?></td>
+                                <?php } ?>
+                        <?php } ?>
                         </tr>
                     <?php } ?> 
                 </tbody>
